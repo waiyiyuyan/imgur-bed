@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的公共图床</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 顶部导航栏 -->
+  <header>
+    <div class="logo">图床</div>
+    <button class="upload-btn" id="uploadOpenBtn">上传图片</button>
+    <!-- 新：局部正方形上传浮层，挂载header内 -->
+    <div id="uploadPopover" class="upload-popover">
+      <span class="popover-close">&times;</span>
+      <!-- 初始状态：图标+提示文字 -->
+      <div class="pop-init" id="popInit">
+        <svg t="1781530190599" class="upload-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1337" width="100" height="100">
+          <path d="M924.78 337.61A449.35 449.35 0 1 0 960 512a446.4 446.4 0 0 0-35.22-174.39zM512 896c-211.74 0-384-172.26-384-384s172.26-384 384-384 384 172.26 384 384-172.26 384-384 384z m202.84-430.5a32 32 0 0 1-45.28 45.23L543.8 384.83l0.07 331.39a32 32 0 0 1-32 32 32 32 0 0 1-32-32l-0.07-331.46-125.9 126a32 32 0 1 1-45.27-45.25l180.52-180.63 0.17-0.15c0.31-0.31 0.64-0.62 1-0.92l0.05-0.05c0.05-0.05 0.36-0.31 0.53-0.46l0.6-0.51 0.1-0.09 0.65-0.51 0.47-0.36 0.16-0.12c0.23-0.17 0.46-0.32 0.69-0.48l0.42-0.3 0.2-0.13 0.7-0.44 0.42-0.26 0.16-0.1h0.06l0.68-0.38 0.47-0.26 0.87-0.45 0.54-0.26 0.81-0.37 0.64-0.28 0.75-0.29 0.74-0.28 0.67-0.23 0.83-0.27 0.62-0.17 0.9-0.25 0.59-0.13 0.93-0.21 0.62-0.11c0.31-0.05 0.61-0.11 0.92-0.15l0.72-0.09 0.82-0.1 0.95-0.07h0.61c1.06-0.05 2.13-0.05 3.19 0h0.59l1 0.07 0.86 0.1 0.5 0.06h0.18l1 0.16 0.34 0.06H518.1l1 0.22h0.2l0.2 0.05h0.15l0.94 0.26 0.36 0.1 0.16 0.05 0.88 0.29 0.43 0.14 0.18 0.07c0.27 0.09 0.52 0.19 0.78 0.29l0.44 0.17 0.22 0.09 0.66 0.29h0.11l0.44 0.2 0.24 0.12 0.56 0.27 0.15 0.08 0.46 0.22a2 2 0 0 0 0.25 0.14l0.47 0.27 0.24 0.13 0.42 0.23 0.23 0.15c0.15 0.08 0.28 0.17 0.42 0.26l0.3 0.18 0.4 0.26 0.2 0.14 0.41 0.28 0.4 0.28 0.3 0.21 0.16 0.12 0.45 0.35 0.42 0.33 0.24 0.19 0.12 0.09 0.58 0.5 0.43 0.37 0.11 0.1 0.06 0.05c0.39 0.35 0.77 0.72 1.14 1.09z" fill="#333333" p-id="1338"></path>
+        </svg>
+        <p class="pop-tip">选择一个文件或将文件拖放到此处</p>
+      </div>
+      <!-- 上传中进度条区域（默认隐藏） -->
+      <div class="pop-progress" id="popProgress">
+        <div class="progress-bg">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <p class="progress-text" id="progressText">0%</p>
+      </div>
+      <!-- 上传完成预览区域（默认隐藏） -->
+      <div class="pop-preview" id="popPreview"></div>
+      <!-- 隐藏真实文件输入，只允许图片 -->
+      <input type="file" id="file-input" accept="image/*" style="display: none;">
+    </div>
+  </header>
+
+  <!-- 主体容器 -->
+  <main class="main-container">
+    <div id="gallery">
+      <div class="waterfall" id="imgGrid">
+        <p class="load-tip">加载中...</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- 大图预览弹窗（保留不动，只看大图用） -->
+  <div id="previewModal" class="modal">
+    <div class="modal-content preview-content">
+      <span class="close-btn">&times;</span>
+      <div class="preview-img-wrapper">
+        <video id="modalVideo" controls style="max-width:100%;max-height:70vh;display:none;"></video>
+        <img id="modalImg" src="" alt="大图预览">
+      </div>
+    </div>
+  </div>
+
+  <!-- 旧全屏上传弹窗全部删除，不再使用 -->
+  <script src="main.js"></script>
+</body>
+</html>
