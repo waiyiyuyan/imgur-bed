@@ -138,10 +138,12 @@ header {
   display: block;
 }
 /* 下层三点容器，单独一行 */
-.btn-bottom-box {
-  padding: 0 12px 8px;
-  text-align: right;
+.btn-bottom-box{
+    position:relative;
+    padding:0 12px 8px;
+    text-align:right;
 }
+
 
 /* 三点按钮基础样式 */
 .more-btn {
@@ -159,21 +161,21 @@ header {
 }
 
 /* 下拉菜单：固定在三点按钮正下方、紧贴对齐 */
-.action-menu {
-  position: absolute;
-  top: auto;
-  bottom: 40px;
-  right: 12px;
-  background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  border-radius: var(--radius);
-  display: none;
-  z-index: 30;
-  width: 140px;
-  text-align: left;
+.action-menu{
+    position:absolute;
+    top:100%;
+    right:0;
+    margin-top:6px;
+
+    display:none;
+    width:140px;
+    background:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,.15);
+    z-index:100;
 }
-.action-menu.show {
-  display: block;
+
+.action-menu.show{
+    display:block;
 }
 
 .menu-item {
