@@ -16,11 +16,6 @@ const popLinkArea = document.getElementById("popLinkArea");
 const linkBox = document.getElementById("linkBox");
 const copyLinkBtn = document.getElementById("copyLinkBtn");
 
-const previewModal = document.getElementById("previewModal");
-const closeBtns = document.querySelectorAll(".close-btn");
-const modalImg = document.getElementById("modalImg");
-const modalVideo = document.getElementById("modalVideo");
-
 // ===================== 配置项（固定你的 Worker 域名）=====================
 const UPLOAD_WORKER = "https://imgurup.lovefree.de5.net";
 const PROXY_WORKER = "https://imgvideop.lovefree.de5.net";
@@ -267,16 +262,6 @@ popoverClose.addEventListener("click", () => {
   fileInput.value = "";
 });
 
-// 大图预览关闭按钮
-closeBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    previewModal.style.display = "none";
-    modalVideo.pause();
-    modalVideo.style.display = "none";
-    modalImg.style.display = "block";
-  });
-});
-
 // 点击上传按钮 → 打开浮层
 uploadBtn.addEventListener("click", () => {
   uploadPopover.style.display = "flex";
@@ -377,18 +362,9 @@ imgGrid.addEventListener("click", e => {
     return;
   }
 
-  // 点击图片区域 → 大图预览
+  // 点击图片新开标签页打开原图
   if (imgWrap) {
-    previewModal.style.display = "flex";
-    if (isVideoUrl(rawUrl)) {
-      modalImg.style.display = "none";
-      modalVideo.style.display = "block";
-      modalVideo.src = proxyUrl;
-    } else {
-      modalVideo.style.display = "none";
-      modalImg.style.display = "block";
-      modalImg.src = proxyUrl;
-    }
+    window.open(proxyUrl, "_blank");
     return;
   }
 
