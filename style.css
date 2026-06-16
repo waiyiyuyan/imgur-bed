@@ -137,21 +137,22 @@ header {
   width: 100%;
   display: block;
 }
+/* 下层三点容器，单独一行 */
+.btn-bottom-box {
+  padding: 0 12px 8px;
+  text-align: right;
+}
 
 /* 三点按钮基础样式 */
 .more-btn {
-  position: absolute;
-  right: 12px;
-  bottom: 8px;
-  background: transparent;
   border: none;
+  background: transparent;
   font-size: 18px;
   color: #666;
   cursor: pointer;
   padding: 4px 8px;
   border-radius: var(--radius);
   transition: color 0.2s;
-  opacity: 1;
 }
 .more-btn:hover {
   color: #000;
@@ -160,10 +161,10 @@ header {
 /* 下拉菜单：固定在三点按钮正下方、紧贴对齐 */
 .action-menu {
   position: absolute;
-  top: calc(100% - 4px);
+  top: auto;
+  bottom: 40px;
   right: 12px;
   background: #fff;
-  /* 如果你之前要求去掉菜单阴影，删除下面box-shadow一行 */
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   border-radius: var(--radius);
   display: none;
