@@ -2,7 +2,7 @@
 :root {
   /* 直角：设为 0
      如需换回圆角：改为 4px / 8px / 16px 任意数值即可 */
-  --radius: 0;
+  --radius:16px;
 }
 
 /* 全局重置 */
@@ -110,8 +110,7 @@ header {
 .img-item {
   break-inside: avoid;
   margin-bottom: 15px;
-  background: #fff;
-  border-radius: var(--radius);
+  background: transparent;
   display: inline-block;
   width: 100%;
   position: relative;
@@ -121,12 +120,11 @@ header {
 /* 图片独立容器 */
 .img-wrap {
   position: relative;
-  padding: 7px;
-  background: #ffffff;
+  padding: 0;
   overflow: hidden;
   border-radius: var(--radius);
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform .2s, box-shadow .2s;
 }
 /* 仅图片区域 hover 放大+阴影 */
 .img-wrap:hover {
@@ -134,14 +132,16 @@ header {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 .img-wrap img {
-  width: 100%;
-  display: block;
+    width:100%;
+    display:block;
+    border-radius:inherit;
 }
 /* 下层三点容器，单独一行 */
 .btn-bottom-box{
     position:relative;
     padding:0 12px 8px;
     text-align:right;
+    background:transparent;
 }
 
 
