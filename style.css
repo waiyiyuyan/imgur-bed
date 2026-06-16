@@ -454,7 +454,7 @@ header {
     right: 16px; /* 手机屏幕右侧留16px空隙，贴右上角 */
     left: auto;
     transform: none;
-    top: 70px;
+    top: 65px;
   }
   .upload-icon {
     width: 48px;
