@@ -451,7 +451,7 @@ header {
   .upload-popover {
     width: 70vw;
     height: 48vh;
-    right: auto;
+    right: 16px; /* 手机屏幕右侧留16px空隙，贴右上角 */
     left: auto;
     transform: none;
     top: 70px;
