@@ -96,10 +96,17 @@ function renderImages(list) {
 		const mdLink = getProxyUrl(item.rawUrl);
         html += `
 		<div class="img-item" data-raw="${item.rawUrl}" data-proxy="${fullSrc}" data-md="![${item.name}](${mdLink})">
-		  <div class="img-wrap">
-		    <img src="${thumbSrc}" alt="媒体文件" loading="lazy">
+		  <!-- 上层：只放图片 -->
+		  <div class="img-box">
+		    <div class="img-wrap">
+		      <img src="${thumbSrc}" alt="媒体文件" loading="lazy">
+		    </div>
 		  </div>
-		  <button class="more-btn">...</button>
+		  <!-- 下层：单独容器装三点按钮 -->
+		  <div class="btn-bottom-box">
+		    <button class="more-btn">...</button>
+		  </div>
+		  <!-- 下拉菜单保留 -->
 		  <div class="action-menu">
 		    <button class="menu-item download-btn">下载文件</button>
 		    <button class="menu-item copy-md-btn">复制 Markdown</button>
