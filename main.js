@@ -21,27 +21,11 @@ const UPLOAD_WORKER = "https://imgurup.lovefree.de5.net";
 const PROXY_WORKER = "https://imgvideop.lovefree.de5.net";
 // =====================================================================
 
-// 全局缓存媒体数据 + 本地持久化 key
-const STORAGE_KEY = "media_list";
+// 云端分页全局变量（替换本地存储）
 let allImageList = [];
-
-// 从本地存储读取历史列表
-function loadLocalList() {
-  const local = localStorage.getItem(STORAGE_KEY);
-  if (local) {
-    try {
-      allImageList = JSON.parse(local);
-    } catch (e) {
-      allImageList = [];
-    }
-  }
-  renderImages(allImageList);
-}
-
-// 保存列表到本地存储
-function saveLocalList(list) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
-}
+let lastCursor = "";
+let hasMore = true;
+let isLoading = false;
 
 /**
  * 拼接代理地址
@@ -104,8 +88,7 @@ function renderImages(list) {
     const end = Math.min(index + batch, list.length);
     for (; index < end; index++) {
       const item = list[index];
-      // const proxySrc = getProxyUrl(item.rawUrl);
-	  // 1. 列表展示小缩略图，给<img src>用
+      // 1. 列表展示小缩略图，给<img src>用
 		const thumbSrc = getThumbUrl(item.rawUrl);
 		// 2. 原图地址，给弹窗预览、下载按钮用，存进 data-proxy
 		const fullSrc = getProxyUrl(item.rawUrl);
@@ -137,13 +120,52 @@ function renderImages(list) {
 }
 
 /**
- * 加载图库（读取本地存储）
+ * 分页加载云端图片列表
+ * @param {boolean} isLoadMore true=滚动加载更多，false=初始化刷新首页
  */
-async function loadGallery() {
-  loadLocalList();
+async function loadMediaList(isLoadMore = false) {
+  if (isLoading || (!hasMore && isLoadMore)) return;
+  isLoading = true;
+
+  try {
+    let reqUrl = `${UPLOAD_WORKER}/listMedia`;
+    if (lastCursor) {
+      reqUrl += `?cursor=${lastCursor}`;
+    }
+    const res = await fetch(reqUrl);
+    const data = await res.json();
+
+    if (!isLoadMore) {
+      // 首次加载，覆盖原有列表
+      allImageList = data.list;
+    } else {
+      // 滚动加载，追加数据
+      allImageList.push(...data.list);
+    }
+
+    // 更新分页标记
+    lastCursor = data.lastCursor;
+    hasMore = data.hasMore;
+    renderImages(allImageList);
+  } catch (err) {
+    console.error("加载图库失败：", err);
+  } finally {
+    isLoading = false;
+  }
 }
 
-setTimeout(loadGallery, 200);
+/**
+ * 滚动触底加载更多监听
+ */
+function handleScrollLoadMore() {
+  const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+  const clientHeight = document.documentElement.clientHeight;
+  const scrollHeight = document.documentElement.scrollHeight;
+  // 距离底部200px触发加载
+  if (scrollTop + clientHeight + 200 >= scrollHeight) {
+    loadMediaList(true);
+  }
+}
 
 /**
  * 上传文件核心逻辑（支持进度条）
@@ -189,18 +211,12 @@ function uploadFile(file) {
       popPreview.innerHTML = `<img src="${proxyLink}" alt="预览图">`;
       popPreview.style.display = "block";
 
-      // 存入本地列表
+      // 直接插入到列表最顶部渲染（云端后端已自动存入D1，无需本地存储）
       allImageList.unshift({
         name: fileName,
         rawUrl: rawLink
       });
-	  // 限制最大保存 80 条，超出删除末尾旧数据
-		const MAX_COUNT = 80;
-		if (allImageList.length > MAX_COUNT) {
-		  allImageList = allImageList.slice(0, MAX_COUNT);
-		}
-      saveLocalList(allImageList);
-      loadGallery();
+      renderImages(allImageList);
     } catch (err) {
       alert("解析返回数据失败");
       popInit.style.display = "flex";
@@ -216,6 +232,12 @@ function uploadFile(file) {
 
   xhr.send(file);
 }
+
+// 页面初始化：加载第一页数据 + 绑定滚动监听
+window.addEventListener("load", () => {
+  loadMediaList(false);
+  window.addEventListener("scroll", handleScrollLoadMore);
+});
 
 // 关闭上传浮层按钮
 popoverClose.addEventListener("click", () => {
@@ -255,15 +277,15 @@ popInit.addEventListener("click", () => {
   fileInput.click();
 });
 
-// 选中文件，仅放行图片
+// 选中文件，支持图片/视频
 fileInput.addEventListener("change", e => {
   const file = e.target.files[0];
-  if (file && file.type.startsWith("image/")) {
+  if (file) {
     uploadFile(file);
   }
 });
 
-// 浮层拖拽上传，仅放行图片
+// 浮层拖拽上传，支持图片/视频
 uploadPopover.addEventListener("dragover", e => {
   e.preventDefault();
   uploadPopover.style.borderColor = "#e60023";
@@ -275,7 +297,7 @@ uploadPopover.addEventListener("drop", e => {
   e.preventDefault();
   uploadPopover.style.borderColor = "#ccc";
   const file = e.dataTransfer.files[0];
-  if (file && file.type.startsWith("image/")) {
+  if (file) {
     uploadFile(file);
   }
 });
@@ -310,7 +332,7 @@ document.addEventListener("click", e => {
   }
 });
 
-// 卡片交互：菜单、预览、下载、复制、删除
+// 卡片交互：菜单、预览、下载、复制
 imgGrid.addEventListener("click", e => {
   const target = e.target;
   const card = target.closest(".img-item");
@@ -384,17 +406,5 @@ imgGrid.addEventListener("click", e => {
       }, 1200);
       e.stopPropagation();
     }
-    // 删除文件
-	/*
-    else if (target.classList.contains("del-btn")) {
-      if (confirm("确定删除该文件？")) {
-        const delRaw = card.dataset.raw;
-        allImageList = allImageList.filter(item => item.rawUrl !== delRaw);
-        saveLocalList(allImageList);
-        renderImages(allImageList);
-      }
-      closeAllMenu();
-    }
-	*/
   }
 });
