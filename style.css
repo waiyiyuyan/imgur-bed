@@ -141,41 +141,35 @@ header {
 /* 三点按钮基础样式 */
 .more-btn {
   position: absolute;
-  right: 7px;
-  bottom: 7px;
-  background: rgba(255,255,255,0.82);
+  right: 12px;
+  bottom: 8px;
+  background: transparent;
   border: none;
   font-size: 18px;
   color: #666;
   cursor: pointer;
   padding: 4px 8px;
   border-radius: var(--radius);
-  transition: background 0.2s, color 0.2s, opacity 0.2s;
-  opacity: 0;
-}
-.img-wrap:hover .more-btn {
+  transition: color 0.2s;
   opacity: 1;
 }
-/* 三点按钮 hover 高亮效果 */
 .more-btn:hover {
-  background: #ffffff;
   color: #000;
 }
 
 /* 下拉菜单：固定在三点按钮正下方、紧贴对齐 */
 .action-menu {
   position: absolute;
-  top: 100%;
-  right: 7px;
+  top: calc(100% - 4px);
+  right: 12px;
   background: #fff;
+  /* 如果你之前要求去掉菜单阴影，删除下面box-shadow一行 */
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   border-radius: var(--radius);
   display: none;
   z-index: 30;
-  
-  /* 新增/修改下面两行 */
-  width: 140px;  /* 调大宽度，根据实际效果微调 130~150px 都行 */
-  text-align: left; /* 内部文字左对齐 */
+  width: 140px;
+  text-align: left;
 }
 .action-menu.show {
   display: block;
