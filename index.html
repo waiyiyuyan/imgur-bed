@@ -30,6 +30,12 @@
       </div>
       <!-- 上传完成预览区域（默认隐藏） -->
       <div class="pop-preview" id="popPreview"></div>
+      <!-- 【新增】上传成功纯链接展示区域 -->
+      <div class="pop-link-area" id="popLinkArea" style="display: none; width: 90%; text-align: center;">
+        <p style="margin-bottom:12px;color:#333;">图片直链：</p>
+        <div class="link-box" id="linkBox" style="background:#fff;padding:10px;word-break:break-all;margin-bottom:12px;border:1px solid #ddd;"></div>
+        <button class="copy-link-btn" id="copyLinkBtn">复制链接</button>
+      </div>
       <!-- 隐藏真实文件输入，只允许图片 -->
       <input type="file" id="file-input" accept="image/*" style="display: none;">
     </div>
