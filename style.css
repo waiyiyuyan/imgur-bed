@@ -449,8 +449,8 @@ header {
 
   /* ---------- 上传弹窗移动端缩小适配（之前功能保留） ---------- */
   .upload-popover {
-    width: 90vw;
-    height: 65vh;
+    width: 80vw;
+    height: 58vh;
     right: auto;
     left: 50%;
     transform: translateX(-50%);
