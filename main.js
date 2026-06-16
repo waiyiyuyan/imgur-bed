@@ -74,7 +74,7 @@ function renderImages(list) {
 
   if (!Array.isArray(list) || list.length === 0) {
     grid.className = "waterfall";
-    grid.innerHTML = "<p class='load-tip'>暂无文件</p>";
+    grid.innerHTML = "<p class='load-tip'>暂无图片</p>";
     return;
   }
 
