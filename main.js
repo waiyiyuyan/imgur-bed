@@ -104,12 +104,12 @@ function renderImages(list) {
 		  </div>
 		  <!-- 下层：单独容器装三点按钮 -->
 		  <div class="btn-bottom-box">
-		    <button class="more-btn">...</button>
-		  </div>
-		  <!-- 下拉菜单保留 -->
-		  <div class="action-menu">
-		    <button class="menu-item download-btn">下载文件</button>
-		    <button class="menu-item copy-md-btn">复制 Markdown</button>
+			    <button class="more-btn">...</button>
+			
+			    <div class="action-menu">
+			        <button class="menu-item download-btn">下载文件</button>
+			        <button class="menu-item copy-md-btn">复制 Markdown</button>
+			    </div>
 		  </div>
 		</div>
 		`;
