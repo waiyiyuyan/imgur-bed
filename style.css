@@ -3,6 +3,12 @@
   /* 直角：设为 0
      如需换回圆角：改为 4px / 8px / 16px 任意数值即可 */
   --radius:16px;
+  --primary:#e60023;
+  --primary-hover:#c2001e;
+  --bg:#fafafa;
+  --text:#222;
+  --text-light:#666;
+  --shadow:0 10px 20px rgba(0,0,0,.15);
 }
 
 /* 全局重置 */
