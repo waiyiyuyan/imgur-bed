@@ -94,19 +94,17 @@ function renderImages(list) {
 		const fullSrc = getProxyUrl(item.rawUrl);
 		// 3. Markdown外链图片也用原图
 		const mdLink = getProxyUrl(item.rawUrl);
-      html += `
-	  <div class="img-item" data-raw="${item.rawUrl}" data-proxy="${fullSrc}" data-md="![${item.name}](${mdLink})">
-        <div class="img-wrap">
-          <img src="${thumbSrc}" alt="媒体文件" loading="lazy">
-        </div>
-        <div class="btn-wrap">
-          <button class="more-btn">...</button>
-        </div>
-        <div class="action-menu">
-          <button class="menu-item download-btn">下载文件</button>
-          <button class="menu-item copy-md-btn">复制 Markdown</button>
-        </div>
-      </div>
+        html += `
+		  <div class="img-item" data-raw="${item.rawUrl}" data-proxy="${fullSrc}" data-md="![${item.name}](${mdLink})">
+	        <div class="img-wrap">
+	          <img src="${thumbSrc}" alt="媒体文件" loading="lazy">
+	          <button class="more-btn">...</button>
+	        </div>
+	        <div class="action-menu">
+	          <button class="menu-item download-btn">下载文件</button>
+	          <button class="menu-item copy-md-btn">复制 Markdown</button>
+	        </div>
+	      </div>
       `;
     }
     grid.innerHTML += html;
