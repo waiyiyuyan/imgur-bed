@@ -430,3 +430,34 @@ header {
   height: 100%;
   object-fit: contain;
 }
+
+/* 手机端适配上传弹窗，屏幕宽度小于480px自动适配 */
+@media (max-width: 480px) {
+  .upload-popover {
+    width: 90vw;
+    height: 65vh;
+    right: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 70px;
+  }
+  /* 缩小上传图标 */
+  .upload-icon {
+    width: 48px;
+    height: 48px;
+  }
+  /* 缩小提示文字 */
+  .pop-tip {
+    font-size: 14px;
+  }
+  /* 缩小关闭按钮 */
+  .popover-close {
+    font-size: 20px;
+    top: 8px;
+    right: 10px;
+  }
+  /* 进度条文字缩小 */
+  .progress-text {
+    font-size: 14px;
+  }
+}
