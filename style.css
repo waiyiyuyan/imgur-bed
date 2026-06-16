@@ -165,7 +165,6 @@ header {
   top: 100%;
   right: 12px;
   background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   border-radius: var(--radius);
   display: none;
   z-index: 30;
