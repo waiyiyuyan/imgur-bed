@@ -155,7 +155,6 @@ header {
 }
 /* 三点按钮 hover 高亮效果 */
 .more-btn:hover {
-  background: #eee;
   color: #000;
 }
 
@@ -165,10 +164,11 @@ header {
   top: 100%;
   right: 12px;
   background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   border-radius: var(--radius);
   display: none;
   z-index: 30;
-
+  
   /* 新增/修改下面两行 */
   width: 140px;  /* 调大宽度，根据实际效果微调 130~150px 都行 */
   text-align: left; /* 内部文字左对齐 */
