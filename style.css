@@ -431,8 +431,23 @@ header {
   object-fit: contain;
 }
 
-/* 手机端适配上传弹窗，屏幕宽度小于480px自动适配 */
+/* 手机端统一适配 宽度≤480px */
 @media (max-width: 480px) {
+  /* ---------- 导航栏：logo 左对齐、上传按钮强制靠右 ---------- */
+  header {
+    padding: 0 16px;
+  }
+  .logo {
+    font-size: 18px;
+    flex-shrink: 1; /* logo 空间不足可缩小文字 */
+  }
+  .upload-btn {
+    flex-shrink: 0; /* 关键：按钮禁止压缩，牢牢固定在最右侧 */
+    padding: 6px 14px;
+    font-size: 13px;
+  }
+
+  /* ---------- 上传弹窗移动端缩小适配（之前功能保留） ---------- */
   .upload-popover {
     width: 90vw;
     height: 65vh;
@@ -441,22 +456,18 @@ header {
     transform: translateX(-50%);
     top: 70px;
   }
-  /* 缩小上传图标 */
   .upload-icon {
     width: 48px;
     height: 48px;
   }
-  /* 缩小提示文字 */
   .pop-tip {
     font-size: 14px;
   }
-  /* 缩小关闭按钮 */
   .popover-close {
     font-size: 20px;
     top: 8px;
     right: 10px;
   }
-  /* 进度条文字缩小 */
   .progress-text {
     font-size: 14px;
   }
