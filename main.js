@@ -11,6 +11,11 @@ const progressFill = document.getElementById("progressFill");
 const progressText = document.getElementById("progressText");
 const popPreview = document.getElementById("popPreview");
 
+// 新增链接面板DOM
+const popLinkArea = document.getElementById("popLinkArea");
+const linkBox = document.getElementById("linkBox");
+const copyLinkBtn = document.getElementById("copyLinkBtn");
+
 const previewModal = document.getElementById("previewModal");
 const closeBtns = document.querySelectorAll(".close-btn");
 const modalImg = document.getElementById("modalImg");
@@ -194,7 +199,7 @@ function uploadFile(file) {
     }
   });
 
-  // 上传完成回调
+    // 上传完成回调
   xhr.addEventListener("load", () => {
     popProgress.style.display = "none";
     try {
@@ -207,9 +212,19 @@ function uploadFile(file) {
 
       const rawLink = data.link;
       const proxyLink = getProxyUrl(rawLink);
-      // 上传成功展示预览图
-      popPreview.innerHTML = `<img src="${proxyLink}" alt="预览图">`;
-      popPreview.style.display = "block";
+      // 上传成功：不显示预览图，只展示纯直链
+      popInit.style.display = "none";
+      popPreview.style.display = "none";
+      popLinkArea.style.display = "flex";
+      linkBox.innerText = proxyLink;
+      // 复制按钮点击事件
+      copyLinkBtn.onclick = function () {
+        navigator.clipboard.writeText(proxyLink);
+        this.innerText = "已复制！";
+        setTimeout(() => {
+          this.innerText = "复制链接";
+        }, 1200);
+      };
 
       // 直接插入到列表最顶部渲染（云端后端已自动存入D1，无需本地存储）
       allImageList.unshift({
@@ -246,6 +261,7 @@ popoverClose.addEventListener("click", () => {
   popInit.style.display = "flex";
   popProgress.style.display = "none";
   popPreview.style.display = "none";
+  popLinkArea.style.display = "none"; // 新增重置链接面板
   progressFill.style.width = "0%";
   progressText.innerText = "0%";
   fileInput.value = "";
@@ -268,6 +284,7 @@ uploadBtn.addEventListener("click", () => {
   popInit.style.display = "flex";
   popProgress.style.display = "none";
   popPreview.style.display = "none";
+  popLinkArea.style.display = "none"; // 新增
   progressFill.style.width = "0%";
   progressText.innerText = "0%";
 });
@@ -326,6 +343,7 @@ document.addEventListener("click", e => {
     popInit.style.display = "flex";
     popProgress.style.display = "none";
     popPreview.style.display = "none";
+    popLinkArea.style.display = "none"; // 新增重置链接面板
     progressFill.style.width = "0%";
     progressText.innerText = "0%";
     fileInput.value = "";
