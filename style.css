@@ -120,6 +120,9 @@ header {
 
 /* 图片独立容器 */
 .img-wrap {
+  position: relative;
+  padding: 7px;
+  background: #ffffff;
   overflow: hidden;
   border-radius: var(--radius);
   cursor: pointer;
@@ -135,26 +138,27 @@ header {
   display: block;
 }
 
-/* 三点按钮独立容器 */
-.btn-wrap {
-  width: 100%;
-  padding: 8px 12px;
-  text-align: right;
-}
-
 /* 三点按钮基础样式 */
 .more-btn {
+  position: absolute;
+  right: 7px;
+  bottom: 7px;
+  background: rgba(255,255,255,0.82);
   border: none;
-  background: transparent;
   font-size: 18px;
   color: #666;
   cursor: pointer;
   padding: 4px 8px;
   border-radius: var(--radius);
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+  opacity: 0;
+}
+.img-wrap:hover .more-btn {
+  opacity: 1;
 }
 /* 三点按钮 hover 高亮效果 */
 .more-btn:hover {
+  background: #ffffff;
   color: #000;
 }
 
@@ -162,7 +166,7 @@ header {
 .action-menu {
   position: absolute;
   top: 100%;
-  right: 12px;
+  right: 7px;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   border-radius: var(--radius);
