@@ -20,7 +20,7 @@
 }
 
 body {
-  background-color: #f5f5f5;
+  background: var(--bg);
   padding-top: 60px;
 }
 
@@ -36,12 +36,12 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 0 24px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  box-shadow:0 1px 4px rgba(0,0,0,.08);
   z-index: 1000;
 }
 
 .logo {
-  color: #e60023;
+  color: var(--primary);
   font-size: 22px;
   font-weight: bold;
   margin-left: 5px;
@@ -49,17 +49,18 @@ header {
 
 /* 顶部上传按钮 */
 .upload-btn {
-  background: #e60023;
+  background: var(--primary);
   color: #fff;
   border: none;
   border-radius: var(--radius);
   padding: 8px 20px;
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background .2s;
 }
+
 .upload-btn:hover {
-  background: #c2001e;
+  background: var(--primary-hover);
 }
 
 /* ========== 主体内容 ========== */
@@ -81,17 +82,18 @@ header {
 .btn {
   display: inline-block;
   padding: 8px 16px;
-  background: #e60023;
+  background: var(--primary);
   color: #fff;
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
   margin: 0 8px;
   font-size: 14px;
-  transition: background 0.2s;
+  transition: background .2s;
 }
+
 .btn:hover {
-  background: #c2001e;
+  background: var(--primary-hover);
 }
 
 /* 图库标题 */
@@ -130,16 +132,20 @@ header {
   overflow: hidden;
   border-radius: var(--radius);
   cursor: pointer;
-  transition: transform .2s, box-shadow .2s;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
 }
 /* 仅图片区域 hover 放大+阴影 */
 .img-wrap:hover {
-  transform: scale(1.02);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    transform: scale(1.02);
+    box-shadow: var(--shadow);
 }
-.img-wrap img {
+.img-wrap img{
     width:100%;
     display:block;
+    height:auto;
+    object-fit:cover;
     border-radius:inherit;
 }
 /* 下层三点容器，单独一行 */
@@ -156,14 +162,15 @@ header {
   border: none;
   background: transparent;
   font-size: 18px;
-  color: #666;
+  color: var(--text-light);
   cursor: pointer;
   padding: 4px 8px;
   border-radius: var(--radius);
-  transition: color 0.2s;
+  transition: color .2s;
 }
+
 .more-btn:hover {
-  color: #000;
+  color: var(--text);
 }
 
 /* 下拉菜单：固定在三点按钮正下方、紧贴对齐 */
@@ -174,9 +181,17 @@ header {
     margin-top:6px;
 
     display:none;
-    width:140px;
+
+    width:160px;
+
     background:#fff;
-    box-shadow:0 4px 12px rgba(0,0,0,.15);
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.12);
+
     z-index:100;
 }
 
@@ -192,9 +207,10 @@ header {
   background: transparent;
   cursor: pointer;
   text-align: left; /* 强制按钮内文字左对齐 */
+  transition:background .15s;
 }
 .menu-item:hover {
-  background: #f5f5f5; /*  hover 背景，可选加 */
+  background:#f2f2f2;
 }
 
 
@@ -336,8 +352,8 @@ header {
 .progress-fill {
   height: 100%;
   width: 0%;
-  background: #e60023;
-  transition: width 0.1s linear;
+  background: var(--primary);
+  transition: width .1s linear;
 }
 
 .progress-text {
@@ -404,15 +420,16 @@ header {
 
 /* 上传成功链接区域按钮样式 */
 .copy-link-btn {
-  background: #e60023;
+  background: var(--primary);
   color: #fff;
   border: none;
   padding: 6px 16px;
   cursor: pointer;
   border-radius: var(--radius);
 }
+
 .copy-link-btn:hover {
-  background: #c2001e;
+  background: var(--primary-hover);
 }
 .pop-link-area {
   display: none;
