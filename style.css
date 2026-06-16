@@ -2,7 +2,7 @@
 :root {
   /* 直角：设为 0
      如需换回圆角：改为 4px / 8px / 16px 任意数值即可 */
-  --radius:0px;
+  --radius:2px;
   --primary:#e60023;
   --primary-hover:#c2001e;
   --bg:#fafafa;
@@ -186,7 +186,7 @@ header {
 
     background:#fff;
 
-    border-radius:0px;
+    border-radius:2px;
 
     overflow:hidden;
 
